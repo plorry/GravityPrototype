@@ -2,14 +2,23 @@
 using System.Collections;
 
 public class RotateyGuy : MonoBehaviour {
+	public Rigidbody rb;
+	public GlobalForces forces;
 
 	// Use this for initialization
-	void Start () {
-	
+	public virtual void Start () {
+		Physics.gravity = new Vector3(0, -100, 0);
+		rb = GetComponent<Rigidbody> ();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		transform.rotation = Quaternion.Euler(0, 0, 0);
+	public virtual void Update () {
+		if (forces.GetDoor()) {
+			rb.AddForce(forces.GetForce());
+		}
+	}
+
+	public void MoveDown() {
+
 	}
 }
